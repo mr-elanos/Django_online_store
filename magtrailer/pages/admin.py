@@ -17,6 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'category')
     list_display_links = ('name', )
 
+
 @admin.register(ProductImages)
 class ProductImagesAdmin(admin.ModelAdmin):
     list_display = ('product', )
