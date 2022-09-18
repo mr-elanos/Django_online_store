@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, db_index=True)
+    name = models.CharField(max_length=100, db_index=True, verbose_name='Категорія')
     slug = models.SlugField(max_length=100, db_index=True, unique=True)
 
     class Meta:
@@ -15,18 +15,18 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
-    name = models.CharField(max_length=100, db_index=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name='Категорія')
+    name = models.CharField(max_length=100, db_index=True, verbose_name='Товар')
     slug = models.SlugField(max_length=100, db_index=True)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    stock = models.PositiveIntegerField()
-    available = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Ціна")
+    stock = models.PositiveIntegerField(verbose_name='Залишок')
+    available = models.BooleanField(default=True, verbose_name='Опубліковано')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата створнення')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Дата оновлення')
 
     class Meta:
-        ordering = ('name', )
+        ordering = ('price', 'name', 'category')
         indexes = [
             models.Index(fields=['id', 'slug'])
         ]
@@ -38,11 +38,13 @@ class Product(models.Model):
 
 
 class ProductImages(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар')
     image = models.ImageField(upload_to='products_images/%Y/%m/%d', blank=True)
 
     class Meta:
         ordering = ('product', )
+        verbose_name = 'Зображення'
+        verbose_name_plural = 'Зображення'
 
     def __str__(self):
         return self.product
