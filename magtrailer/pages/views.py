@@ -2,9 +2,11 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from .models import *
 
+menu = ['ГОЛОВНА', 'ВСІ ПРИЧЕПИ', 'ПРО ПІДПРИЄМСТВО', 'КОНТАКТИ']
+
 
 def index(request):
-    return HttpResponse('Main page')
+    return render(request, 'pages/index.html', {'menu': menu, 'title': 'Main page'})
 
 
 def categories(request, catid):
