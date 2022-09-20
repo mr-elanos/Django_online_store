@@ -10,9 +10,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'slug', 'price', 'stock', 'available', 'created')  # Общее отображение в админке
-    list_filter = ('available', 'category', 'price', 'created', 'updated')  # Фильтровать по этим полям в админке
-    list_editable = ('price', 'stock', 'available')  # Изменяемые поля без общего редактирования
+    list_display = ('id', 'name', 'slug', 'price', 'stock', 'available', 'availability')  # Общее отображение в админке
+    list_filter = ('available', 'category', 'price', 'created', 'updated', 'availability')  # Фильтровать по этим полям в админке
+    list_editable = ('price', 'stock', 'available', 'availability')  # Изменяемые поля без общего редактирования
     prepopulated_fields = {'slug': ('name', )}  # Одновременное заполнение
     search_fields = ('name', 'category')
     list_display_links = ('name', )

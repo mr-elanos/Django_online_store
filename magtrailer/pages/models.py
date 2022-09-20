@@ -24,6 +24,12 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name='Опубліковано')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата створнення')
     updated = models.DateTimeField(auto_now=True, verbose_name='Дата оновлення')
+    availability = models.CharField(max_length=30, verbose_name='Наявність')
+    width = models.IntegerField(verbose_name='Ширина кузова')
+    length = models.IntegerField(verbose_name='Довжина кузова')
+    height = models.IntegerField(verbose_name='Висота борту')
+    full_weight = models.IntegerField(verbose_name='Повна маса')
+    max_weight = models.IntegerField(verbose_name="Вантажопід'ємність")
 
     class Meta:
         ordering = ('price', 'name', 'category')
@@ -47,4 +53,4 @@ class ProductImages(models.Model):
         verbose_name_plural = 'Зображення'
 
     def __str__(self):
-        return self.product
+        return f'{self.product}'

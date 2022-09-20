@@ -2,15 +2,43 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from .models import *
 
-menu = ['ГОЛОВНА', 'ВСІ ПРИЧЕПИ', 'ПРО ПІДПРИЄМСТВО', 'КОНТАКТИ']
+menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
+        {'title': 'ВСІ ПРИЧЕПИ', 'url_name': 'all_categories'},
+        {'title': 'ПРО ПІДПРИЄМСТВО', 'url_name': 'about'},
+        {'title': 'КОНТАКТИ', 'url_name': 'contacts'}
+        ]
 
 
 def index(request):
-    return render(request, 'pages/index.html', {'menu': menu, 'title': 'Main page'})
+    context = {
+        'menu': menu,
+        'title': 'Main page'
+    }
+    return render(request, 'pages/index.html', context=context)
 
 
-def categories(request, catid):
-    return HttpResponse(f'<h1>Categories {catid}</h1>')
+def about(request):
+    context = {
+        'menu': menu,
+        'title': 'About'
+    }
+    return render(request, 'pages/about.html', context=context)
+
+
+def categories(request):
+    products = Product.objects.all()
+    cat = ['Одноосні', 'Двохосні', 'Спеціалізовані']
+    context = {
+        'cat': cat,
+        'menu': menu,
+        'products': products,
+        'title': 'Категорії'
+    }
+    return render(request, 'pages/categories.html', context=context)
+
+
+def contacts(request):
+    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Contacts'})
 
 
 def pageNotFound(request, exception):
