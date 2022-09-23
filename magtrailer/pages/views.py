@@ -12,7 +12,7 @@ menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
 def index(request):
     context = {
         'menu': menu,
-        'title': 'Main page'
+        'title': 'Завод автомобільних причепів MAG Trailer'
     }
     return render(request, 'pages/index.html', context=context)
 
@@ -20,25 +20,34 @@ def index(request):
 def about(request):
     context = {
         'menu': menu,
-        'title': 'About'
+        'title': 'Про підприємство'
     }
     return render(request, 'pages/about.html', context=context)
 
 
-def categories(request):
-    products = Product.objects.all()
-    cat = ['Одноосні', 'Двохосні', 'Спеціалізовані']
+def categories(request, cat_id=0):
+    if cat_id == 0:
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(category_id=cat_id)
+    cats = Category.objects.all()
     context = {
-        'cat': cat,
+        'cats': cats,
         'menu': menu,
         'products': products,
-        'title': 'Категорії'
+        'title': 'Наші причепи',
+        'cat_selected': cat_id,
     }
     return render(request, 'pages/categories.html', context=context)
 
 
 def contacts(request):
-    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Contacts'})
+    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти'})
+
+
+def show_product(request, product_id):
+    return HttpResponse(f'Product: {product_id}')
+
 
 
 def pageNotFound(request, exception):
