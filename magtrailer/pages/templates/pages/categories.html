@@ -6,16 +6,16 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-3">
-                {% if cat_selected == 0 %}
-                    <h1>Всі причепи</h1>
-                {% else %}:
-                    <a class="nav-link" href="{% url 'all_categories' %}">Всі причепи</a>
-                {% endif %}
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                     <li class="nav-item">
+                {% if cat_selected == 0 %}
+                    <h2>Всі причепи</h2>
+                {% else %}
+                    <a class="nav-link" href="{% url 'all_categories' %}">Всі причепи</a>
+                {% endif %}
                         {% for c in cats %}
                             {% if c.pk == cat_selected %}
-                                <h1>{{c.name}}</h1>
+                                <h2>{{c.name}}</h2>
                             {% else %}
                                 <a class="nav-link" href="{{ c.get_absolute_url }}">
                                     {{ c.name }}
@@ -32,7 +32,9 @@
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="assets/img/shop_09.jpg">
+                                {% if p.image %}
+                                <img class="card-img rounded-0 img-fluid" src="{{p.image.url}}">
+                                {% endif %}
                             </div>
                             <div class="card-body">
                                 <a href="{{ p.get_absolute_url }}" class="h3 text-decoration-none"><center>{{ p.name }}</center></a>

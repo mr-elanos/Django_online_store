@@ -91,21 +91,15 @@
             </div>
         </div>
         <div class="row">
+            {% for c in cats %}
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="{% static 'pages/images/category_img_01.jpg' %}" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Одноосні</h5>
-                <p class="text-center"><a class="btn btn-success">До розділу</a></p>
+                {% if c.image %}
+                <a href="{{ c.get_absolute_url }}"><img src="{{c.image.url}}" class="rounded-circle img-fluid border"></a>
+                {% endif %}
+                <h5 class="text-center mt-3 mb-3">{{c.name}}</h5>
+                <p class="text-center"><a class="btn btn-success" href="{{ c.get_absolute_url }}">До розділу</a></p>
             </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="{% static 'pages/images/category_img_02.jpg' %}" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Двохосні</h2>
-                <p class="text-center"><a class="btn btn-success">До розділу</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="{% static 'pages//images/category_img_03.jpg' %}" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Спеціалізовані</h2>
-                <p class="text-center"><a class="btn btn-success">До розділу</a></p>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <!-- End Categories of The Month -->

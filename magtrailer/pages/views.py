@@ -8,9 +8,12 @@ menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
         {'title': 'КОНТАКТИ', 'url_name': 'contacts'}
         ]
 
+cats = Category.objects.all()
+
 
 def index(request):
     context = {
+        'cats': cats,
         'menu': menu,
         'title': 'Завод автомобільних причепів MAG Trailer'
     }
@@ -19,6 +22,7 @@ def index(request):
 
 def about(request):
     context = {
+        'cats': cats,
         'menu': menu,
         'title': 'Про підприємство'
     }
@@ -27,10 +31,9 @@ def about(request):
 
 def categories(request, cat_id=0):
     if cat_id == 0:
-        products = Product.objects.all()
+        products = Product.objects.filter(available=True)
     else:
-        products = Product.objects.filter(category_id=cat_id)
-    cats = Category.objects.all()
+        products = Product.objects.filter(category_id=cat_id, available=True)
     context = {
         'cats': cats,
         'menu': menu,
@@ -42,12 +45,11 @@ def categories(request, cat_id=0):
 
 
 def contacts(request):
-    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти'})
+    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти', 'cats': cats})
 
 
 def show_product(request, product_id):
     return HttpResponse(f'Product: {product_id}')
-
 
 
 def pageNotFound(request, exception):

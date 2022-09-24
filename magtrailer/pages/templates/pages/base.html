@@ -141,10 +141,11 @@
                             <i class="fa fa-phone fa-fw"></i>
                             <a class="text-decoration-none" href="tel:010-020-0340">050-471-4728</a>
                         </li>
+                        </li>
                         <li>
-                            <a class="text-decoration-none">Режим роботи:</a>
+                            <h4 class="text-decoration-none">Режим роботи:</h4>
                             <p>Пн-Пт 08:00 - 16:00</p>
-                            <a class="text-decoration-none">Обідня перерва:</a>
+                            <h4 class="text-decoration-none">Обідня перерва:</h4>
                             <p>12:30 - 13:30</p>
                         </li>
                     </ul>
@@ -153,18 +154,17 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Категорії</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Одноосні причепи</a></li>
-                        <li><a class="text-decoration-none" href="#">Двохосні причепи</a></li>
-                        <li><a class="text-decoration-none" href="#">Спеціалізовані причепи</a></li>
+                        {% for c in cats %}
+                        <li><a class="text-decoration-none" href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
 
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Інформація</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Про нас</a></li>
-                        <li><a class="text-decoration-none" href="#">Контакти</a></li>
-                        <li><a class="text-decoration-none" href="#">Місцезнаходження</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'about' %}">Про нас</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contacts' %}">Контакти</a></li>
                     </ul>
                 </div>
 

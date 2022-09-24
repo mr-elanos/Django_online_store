@@ -5,6 +5,7 @@ from django.urls import reverse
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True, verbose_name='Категорія')
     slug = models.SlugField(max_length=100, db_index=True, unique=True)
+    image = models.ImageField(upload_to='products_images/%Y/%m/%d', blank=True, null=True)
 
     class Meta:
         ordering = ('name', )
@@ -34,6 +35,7 @@ class Product(models.Model):
     height = models.IntegerField(verbose_name='Висота борту')
     full_weight = models.IntegerField(verbose_name='Повна маса')
     max_weight = models.IntegerField(verbose_name="Вантажопід'ємність")
+    image = models.ImageField(upload_to='products_images/%Y/%m/%d', blank=True, null=True)
 
     class Meta:
         ordering = ('price', 'name', 'category')
