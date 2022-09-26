@@ -16,13 +16,13 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('all_categories', kwargs={'cat_id': self.pk})
+        return reverse('all_categories', kwargs={'cat_slug': self.slug})
 
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name='Категорія')
     name = models.CharField(max_length=100, db_index=True, verbose_name='Товар')
-    slug = models.SlugField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, db_index=True, unique=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Ціна")
     stock = models.PositiveIntegerField(verbose_name='Залишок')
@@ -49,7 +49,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('product', kwargs={'product_id': self.pk})
+        return reverse('product', kwargs={'product_slug': self.slug})
 
 
 class ProductImages(models.Model):
