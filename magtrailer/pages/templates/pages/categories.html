@@ -35,7 +35,7 @@
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
                                 {% if p.image %}
-                                <img class="card-img rounded-0 img-fluid" src="{{p.image.url}}">
+                                <a href="{{ p.get_absolute_url }}"><img class="card-img rounded-0 img-fluid" src="{{p.image.url}}"></a>
                                 {% endif %}
                             </div>
                             <div class="card-body">

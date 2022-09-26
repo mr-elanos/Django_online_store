@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 
 menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
@@ -44,7 +44,16 @@ def contacts(request):
 
 
 def show_product(request, product_id):
-    return HttpResponse(f'Product: {product_id}')
+    product = get_object_or_404(Product, pk=product_id)
+    photos = ProductImages.objects.filter(product_id=product_id)
+    context = {
+        'menu': menu,
+        'product': product,
+        'photos': photos,
+        'title': product.name,
+        'cat_selected': product.category_id,
+    }
+    return render(request, 'pages/product.html', context=context)
 
 
 def pageNotFound(request, exception):
