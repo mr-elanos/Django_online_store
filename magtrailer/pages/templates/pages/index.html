@@ -91,7 +91,9 @@
             </div>
         </div>
         <div class="row">
-            {% for c in cats %}
+            {% load pages_tags %}
+            {% getcats as categories %}
+            {% for c in categories %}
             <div class="col-12 col-md-4 p-5 mt-3">
                 {% if c.image %}
                 <a href="{{ c.get_absolute_url }}"><img src="{{c.image.url}}" class="rounded-circle img-fluid border"></a>

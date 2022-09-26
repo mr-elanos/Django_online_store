@@ -154,7 +154,9 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Категорії</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        {% for c in cats %}
+                        {% load pages_tags %}
+                        {% getcats as categories %}
+                        {% for c in categories %}
                         <li><a class="text-decoration-none" href="{{c.get_absolute_url}}">{{c.name}}</a></li>
                         {% endfor %}
                     </ul>

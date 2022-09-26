@@ -8,12 +8,9 @@ menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
         {'title': 'КОНТАКТИ', 'url_name': 'contacts'}
         ]
 
-cats = Category.objects.all()
-
 
 def index(request):
     context = {
-        'cats': cats,
         'menu': menu,
         'title': 'Завод автомобільних причепів MAG Trailer'
     }
@@ -22,7 +19,6 @@ def index(request):
 
 def about(request):
     context = {
-        'cats': cats,
         'menu': menu,
         'title': 'Про підприємство'
     }
@@ -35,7 +31,6 @@ def categories(request, cat_id=0):
     else:
         products = Product.objects.filter(category_id=cat_id, available=True)
     context = {
-        'cats': cats,
         'menu': menu,
         'products': products,
         'title': 'Наші причепи',
@@ -45,7 +40,7 @@ def categories(request, cat_id=0):
 
 
 def contacts(request):
-    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти', 'cats': cats})
+    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти'})
 
 
 def show_product(request, product_id):
