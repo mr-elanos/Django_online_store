@@ -40,7 +40,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h1 class="h2">{{product.name}}</h1>
-                            <p class="h3 py-2">{{product.price}} грн. </p>
                             <h6>Опис:</h6>
                             <p>{{product.description}}</p>
 
@@ -53,13 +52,18 @@
                                 <li>Випробовувана вантажопід'ємність: {{product.max_weight}} кг</li>
                             </ul>
                             <p><strong><h3>{{product.availability}}</h3></strong></p>
+                            <p class="h3 py-2"><h5>Ціна: {{product.price}} грн.</h5></p>
 
                             <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
 
                                 <div class="row pb-3">
                                     <div class="col d-grid">
+                                        {% if product.availability == 'Під замовлення' %}
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Замовити</button>
+                                        {% else %}
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Купити</button>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </form>

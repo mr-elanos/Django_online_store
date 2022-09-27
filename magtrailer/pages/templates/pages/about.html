@@ -2,5 +2,69 @@
 {% load static %}
 
 {% block content %}
-<h1>About</h1>
+    <section class="bg-success py-5">
+        <div class="container">
+            <div class="row align-items-center py-5">
+                <div class="col-md-8 text-white">
+                    <h1>Про нас</h1>
+                    <p>
+                           Приватне підприємство "Маринов", існує на ринку продажу автомобільних причепів вже понад
+                        20 років. За цей час ми співпрацювали практично з усіма виробниками причіпної техніки
+                        в Україні, у кожного з яких були свої як сильні, так і слабкі сторони.
+                    </p>
+                    <p>
+                        Маючи багаторічний досвід роботи та враховуючи помилки попередників, було прийнято рішення
+                        відкрити в місті Запоріжжі завод з виробництва автомобільних причепів міжнародного стандарту
+                        якості - MAG Trailer.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'pages/images/apple-icon.png' %}" alt="About Hero">
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="bg-light py-5">
+        <div class="container my-4">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Наші партнери:</h1>
+                </div>
+                <div class="col-lg-9 m-auto tempaltemo-carousel">
+                    <div class="row d-flex flex-row">
+                        <!--Carousel Wrapper-->
+                        <div class="col">
+                            <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand" data-bs-ride="carousel">
+                                <!--Slides-->
+                                <div class="carousel-inner product-links-wap" role="listbox">
+                                    <!--First slide-->
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="{% static 'pages/images/alko_logo.png' %}" alt="Brand Logo"></a>
+                                            </div>
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="{% static 'pages/images/Knott_logo.png' %}" alt="Brand Logo"></a>
+                                            </div>
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="{% static 'pages/images/fristom_logo.jfif' %}" alt="Brand Logo"></a>
+                                            </div>
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="{% static 'pages/images/winterhoff_logo.png' %}" alt="Brand Logo"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <p>
+                                <h4>Вже багато років ми співпрацюємо зі світовим лідерами у виготовленні запчастин, фурнітури та
+                                світлотехніки для причепів. Тому обираючи нас, Ви можете бути впевнені у якості, перевіренній
+                                часом!</h4>
+                                </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
