@@ -5,8 +5,9 @@ from .forms import ContactForm
 
 menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
         {'title': 'НАШІ ПРИЧЕПИ', 'url_name': 'all_categories'},
-        {'title': 'ПРО НАС', 'url_name': 'about'},
-        {'title': 'КОНТАКТИ', 'url_name': 'contacts'}
+        {'title': 'ДОСТАВКА І ОПЛАТА', 'url_name': 'buy_and_delivery'},
+        {'title': 'КОНТАКТИ', 'url_name': 'contacts'},
+        {'title': 'ПРО НАС', 'url_name': 'about'}
         ]
 
 
@@ -16,14 +17,6 @@ def index(request):
         'title': 'Завод автомобільних причепів MAG Trailer'
     }
     return render(request, 'pages/index.html', context=context)
-
-
-def about(request):
-    context = {
-        'menu': menu,
-        'title': 'Про підприємство'
-    }
-    return render(request, 'pages/about.html', context=context)
 
 
 def categories(request, cat_slug=None):
@@ -38,6 +31,27 @@ def categories(request, cat_slug=None):
         'cat_selected': cat_slug,
     }
     return render(request, 'pages/categories.html', context=context)
+
+
+def show_product(request, product_slug):
+    product = get_object_or_404(Product, slug=product_slug)
+    photos = ProductImages.objects.filter(product_id=product.id)
+    context = {
+        'menu': menu,
+        'product': product,
+        'photos': photos,
+        'title': product.name,
+        'cat_selected': product.category_id,
+    }
+    return render(request, 'pages/product.html', context=context)
+
+
+def buy_and_delivery(request):
+    context = {
+        'menu': menu,
+        'title': 'Доставка і оплата'
+    }
+    return render(request, 'pages/buy_and_delivery.html', context=context)
 
 
 def contacts(request):
@@ -58,17 +72,12 @@ def ok_form(request):
     return render(request, 'pages/ok_form.html', {'menu': menu, 'title': 'Звернення прийнято', })
 
 
-def show_product(request, product_slug):
-    product = get_object_or_404(Product, slug=product_slug)
-    photos = ProductImages.objects.filter(product_id=product.id)
+def about(request):
     context = {
         'menu': menu,
-        'product': product,
-        'photos': photos,
-        'title': product.name,
-        'cat_selected': product.category_id,
+        'title': 'Про підприємство'
     }
-    return render(request, 'pages/product.html', context=context)
+    return render(request, 'pages/about.html', context=context)
 
 
 def pageNotFound(request, exception):
