@@ -2,6 +2,13 @@ from django.contrib import admin
 from .models import *
 
 
+@admin.register(Contacts)
+class ContactsAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'date', 'is_answer')
+    list_filter = ('is_answer',)
+    list_editable = ('is_answer',)
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug')

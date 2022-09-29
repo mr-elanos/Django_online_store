@@ -63,3 +63,20 @@ class ProductImages(models.Model):
 
     def __str__(self):
         return f'{self.product}'
+
+
+class Contacts(models.Model):
+    first_name = models.CharField(max_length=30, verbose_name="Ім'я")
+    last_name = models.CharField(max_length=30, verbose_name='Прізвище')
+    clients_number = models.CharField(max_length=13, verbose_name='Телефонний номер')
+    message = models.TextField(verbose_name='Питання')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата задання')
+    is_answer = models.BooleanField(default=False, verbose_name='Прочитано / Не прочитано')
+
+    class Meta:
+        ordering = ('date', 'is_answer', 'first_name')
+        verbose_name = 'Запитання'
+        verbose_name_plural = 'Запитання'
+
+    def __str__(self):
+        return f'{self.first_name}, {self.last_name}'

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
+from .forms import ContactForm
 
 menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
         {'title': 'НАШІ ПРИЧЕПИ', 'url_name': 'all_categories'},
@@ -40,7 +41,21 @@ def categories(request, cat_slug=None):
 
 
 def contacts(request):
-    return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти'})
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            try:
+                Contacts.objects.create(**form.cleaned_data)
+                return redirect(ok_form)
+            except:
+                form.add_error(None, "Виникла помилка")
+    else:
+        form = ContactForm
+        return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти', 'form': form})
+
+
+def ok_form(request):
+    return render(request, 'pages/ok_form.html', {'menu': menu, 'title': 'Звернення прийнято', })
 
 
 def show_product(request, product_slug):
