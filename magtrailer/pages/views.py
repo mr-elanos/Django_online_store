@@ -58,13 +58,10 @@ def contacts(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            try:
-                Contacts.objects.create(**form.cleaned_data)
-                return redirect(ok_form)
-            except:
-                form.add_error(None, "Виникла помилка")
+            form.save()
+            return redirect(ok_form)
     else:
-        form = ContactForm
+        form = ContactForm()
         return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти', 'form': form})
 
 
