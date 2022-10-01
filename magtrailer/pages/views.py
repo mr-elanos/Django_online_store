@@ -1,5 +1,8 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
+
 from .models import *
 from .forms import ContactForm
 
@@ -12,57 +15,69 @@ menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
 
 
 def index(request):
-    context = {
-        'menu': menu,
-        'title': 'Завод автомобільних причепів MAG Trailer'
-    }
-    return render(request, 'pages/index.html', context=context)
+    return render(request, 'pages/index.html', {'menu': menu, 'title': 'Завод автомобільних причепів MAG Trailer'})
 
 
-def categories(request, cat_slug=None):
-    if not cat_slug:
-        products = Product.objects.filter(available=True)
-    else:
-        products = Product.objects.filter(category__slug=cat_slug, available=True)
-    context = {
-        'menu': menu,
-        'products': products,
-        'title': 'Наші причепи',
-        'cat_selected': cat_slug,
-    }
-    return render(request, 'pages/categories.html', context=context)
+class AllCategories(ListView):
+    model = Product
+    template_name = 'pages/categories.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['title'] = 'Наші причепи'
+        context['cat_selected'] = None
+        return context
+
+    def get_queryset(self):
+        return Product.objects.filter(available=True)
 
 
-def show_product(request, product_slug):
-    product = get_object_or_404(Product, slug=product_slug)
-    photos = ProductImages.objects.filter(product_id=product.id)
-    context = {
-        'menu': menu,
-        'product': product,
-        'photos': photos,
-        'title': product.name,
-        'cat_selected': product.category_id,
-    }
-    return render(request, 'pages/product.html', context=context)
+class ShowCategories(ListView):
+    model = Product
+    template_name = 'pages/categories.html'
+    context_object_name = 'products'
+    allow_empty = False
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['title'] = 'Категорія: ' + str(context['products'][0].category)
+        context['cat_selected'] = context['products'][0].category_id
+        return context
+
+    def get_queryset(self):
+        return Product.objects.filter(category__slug=self.kwargs['cat_slug'], available=True)
+
+
+class ShowProduct(DetailView):
+    model = Product
+    template_name = 'pages/product.html'
+    slug_url_kwarg = 'product_slug'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['title'] = context['product'].name
+        context['photos'] = ProductImages.objects.filter(product_id=context['product'].id)
+        return context
 
 
 def buy_and_delivery(request):
-    context = {
-        'menu': menu,
-        'title': 'Доставка і оплата'
-    }
-    return render(request, 'pages/buy_and_delivery.html', context=context)
+    return render(request, 'pages/buy_and_delivery.html', {'menu': menu, 'title': 'Доставка і оплата'})
 
 
-def contacts(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(ok_form)
-    else:
-        form = ContactForm()
-        return render(request, 'pages/contacts.html', {'menu': menu, 'title': 'Контакти', 'form': form})
+class Contacts(CreateView):
+    form_class = ContactForm
+    template_name = 'pages/contacts.html'
+    success_url = reverse_lazy('ok_form')
+
+    def get_context_data(self,*, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакти'
+        context['menu'] = menu
+        return context
 
 
 def ok_form(request):
@@ -70,11 +85,7 @@ def ok_form(request):
 
 
 def about(request):
-    context = {
-        'menu': menu,
-        'title': 'Про підприємство'
-    }
-    return render(request, 'pages/about.html', context=context)
+    return render(request, 'pages/about.html', {'menu': menu, 'title': 'Про підприємство'})
 
 
 def pageNotFound(request, exception):

@@ -15,7 +15,7 @@
                         {% load pages_tags %}
                         {% getcats as categories %}
                         {% for c in categories %}
-                            {% if c.slug == cat_selected %}
+                            {% if c.id == cat_selected %}
                                 <h2>{{c.name}}</h2>
                             {% else %}
                                 <a class="nav-link" href="{{ c.get_absolute_url }}">
