@@ -6,6 +6,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True, verbose_name='Категорія')
     slug = models.SlugField(max_length=100, db_index=True, unique=True)
     image = models.ImageField(upload_to='products_images/%Y/%m/%d', blank=True, null=True)
+    available = models.BooleanField(default=True, null=True, verbose_name='Опубліковано')
 
     class Meta:
         ordering = ('name', )

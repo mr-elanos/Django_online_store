@@ -6,4 +6,4 @@ register = template.Library()
 
 @register.simple_tag(name='getcats')
 def get_categories():
-    return Category.objects.all()
+    return Category.objects.filter(available=True)
