@@ -12,9 +12,11 @@ menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
 
 class PagesMixin:
     paginate_by = 1
+
     def get_user_context(self, **kwargs):
         context = kwargs
         context['menu'] = menu
         if 'cat_selected' not in context:
             context['cat_selected'] = None
         return context
+

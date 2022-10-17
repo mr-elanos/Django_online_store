@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -73,6 +74,23 @@ class Contacts(PagesMixin, CreateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Контакти')
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class Search(PagesMixin, ListView):
+    template_name = 'pages/search_result.html'
+    model = Product
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Product.objects.filter(Q(name__icontains=query.lower()) | Q(description__icontains=query.lower())
+                                             | Q(name__icontains=query.capitalize())
+                                             | Q(description__icontains=query.capitalize()))
+        return object_list
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title='Результат пошуку')
         return dict(list(context.items()) + list(c_def.items()))
 
 

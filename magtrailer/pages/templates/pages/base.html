@@ -25,9 +25,9 @@
             <div class="w-100 pt-1 mb-5 text-right">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <form action="{% url 'search_result' %}" method="get" class="modal-content modal-body border-0 p-0">
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Пошук ...">
                     <button type="submit" class="input-group-text bg-success text-light">
                         <i class="fa fa-fw fa-search text-white"></i>
                     </button>
@@ -51,10 +51,8 @@
                     <a class="navbar-sm-brand text-light text-decoration-none">050-471-4728</a>
                 </div>
                 <div>
-                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.youtube.com/" target="_blank" rel="sponsored"><i class="fab fa-youtube fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
                 </div>
             </div>
         </div>
@@ -87,7 +85,7 @@
                 <div class="navbar align-self-center d-flex">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Пошук ...">
                             <div class="input-group-text">
                                 <i class="fa fa-fw fa-search"></i>
                             </div>
@@ -95,14 +93,6 @@
                     </div>
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
                     </a>
                 </div>
             </div>
@@ -119,10 +109,9 @@
 {% if page_obj.has_other_pages %}
     <div div="row">
         <ul class="pagination pagination-lg justify-content-end">
-
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?page={{page_obj.previous_page_number}}">&lt;</a>
+                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{page_obj.previous_page_number}}">&lt;</a>
             </li>
             {% endif %}
 
@@ -133,14 +122,13 @@
             </li>
             {% elif p >= page_obj.number|add:-1 and p <= page_obj.number|add:1 %}
             <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?page={{p}}">{{p}}</a>
+                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{p}}">{{p}}</a>
             </li>
             {% endif %}
             {% endfor %}
-
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?page={{page_obj.next_page_number}}">&gt;</a>
+                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{page_obj.next_page_number}}">&gt;</a>
             </li>
             {% endif %}
         </ul>
