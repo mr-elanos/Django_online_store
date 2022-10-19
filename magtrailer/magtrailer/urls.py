@@ -1,6 +1,6 @@
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from magtrailer import settings
 from pages.views import *
@@ -8,6 +8,7 @@ from pages.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cart/', include('cart.urls')),
     path('', include('pages.urls')),  # отдельно добавляет маршруты приложения
 ]
 

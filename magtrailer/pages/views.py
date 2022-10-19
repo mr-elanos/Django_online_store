@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from .models import *
 from .forms import ContactForm
 from .utils import PagesMixin
+from cart.forms import *
 
 menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
         {'title': 'НАШІ ПРИЧЕПИ', 'url_name': 'all_categories'},
@@ -52,6 +53,7 @@ class ShowCategories(PagesMixin, ListView):
 
 class ShowProduct(PagesMixin, DetailView):
     model = Product
+    form_class = CartAddProductForm
     template_name = 'pages/product.html'
     slug_url_kwarg = 'product_slug'
 
