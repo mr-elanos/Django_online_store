@@ -10,7 +10,7 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('contacts/ok_form/', ok_form, name='ok_form'),
     path('contacts/', Contacts.as_view(), name='contacts'),
-    path('product/<slug:product_slug>', ShowProduct.as_view(), name='product'),
+    path('product/<slug:product_slug>/', ShowProduct.as_view(), name='product'),
     path('buy_and_delivery/', buy_and_delivery, name='buy_and_delivery'),
     path('search_result/', Search.as_view(), name='search_result')
 ]

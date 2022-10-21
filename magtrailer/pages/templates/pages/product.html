@@ -54,15 +54,15 @@
                             <p><strong><h3>{{product.availability}}</h3></strong></p>
                             <p class="h3 py-2"><h5>Ціна: {{product.price}} грн.</h5></p>
 
-                            <form action="" method="GET">
-                                <input type="hidden" name="product-title" value="Activewear">
-
+                            <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                 <div class="row pb-3">
                                     <div class="col d-grid">
+                                        {% csrf_token %}
+                                        {{ form }}
                                         {% if product.availability == 'Під замовлення' %}
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Замовити</button>
+                                        <input type="submit" class="btn btn-success btn-lg" value="Замовити">
                                         {% else %}
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Купити</button>
+                                        <input type="submit" class="btn btn-success btn-lg" value="Купити">
                                         {% endif %}
                                     </div>
                                 </div>

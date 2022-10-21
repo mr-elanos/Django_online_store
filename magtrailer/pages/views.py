@@ -1,20 +1,14 @@
 from django.db.models import Q
 from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 
 from .models import *
 from .forms import ContactForm
-from .utils import PagesMixin
-from cart.forms import *
-
-menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
-        {'title': 'НАШІ ПРИЧЕПИ', 'url_name': 'all_categories'},
-        {'title': 'ДОСТАВКА І ОПЛАТА', 'url_name': 'buy_and_delivery'},
-        {'title': 'КОНТАКТИ', 'url_name': 'contacts'},
-        {'title': 'ПРО НАС', 'url_name': 'about'}
-        ]
+from .utils import PagesMixin, menu
+from cart.forms import CartAddProductForm
 
 
 def index(request):
@@ -53,13 +47,13 @@ class ShowCategories(PagesMixin, ListView):
 
 class ShowProduct(PagesMixin, DetailView):
     model = Product
-    form_class = CartAddProductForm
     template_name = 'pages/product.html'
     slug_url_kwarg = 'product_slug'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['photos'] = ProductImages.objects.filter(product_id=context['product'].id)
+        context['form'] = CartAddProductForm
         c_def = self.get_user_context(title=context['product'].name)
         return dict(list(context.items()) + list(c_def.items()))
 

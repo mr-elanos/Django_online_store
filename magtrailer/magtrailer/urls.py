@@ -1,3 +1,4 @@
+import path as path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
@@ -8,7 +9,7 @@ from pages.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cart/', include('cart.urls')),
+    re_path(r'^cart/', include('cart.urls')),
     path('', include('pages.urls')),  # отдельно добавляет маршруты приложения
 ]
 

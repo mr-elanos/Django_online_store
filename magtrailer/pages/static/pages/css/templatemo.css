@@ -71,7 +71,7 @@ body, ul, li, p, a, label, input, div {
 #templatemo_nav_top { min-height: 40px;}
 #templatemo_nav_top * { font-size: .9em !important;}
 #templatemo_main_nav a { color: #212934;}
-#templatemo_main_nav a:hover { color: #69bb7e;}
+#templatemo_main_nav a:hover { color: #823ac7;}
 #templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
 
 /* Hero Carousel */
@@ -138,7 +138,7 @@ body, ul, li, p, a, label, input, div {
 .form-control { border: 1px solid #e8e8e8;}
 /* Footer */
 #tempaltemo_footer a { color: #dcdde1;}
-#tempaltemo_footer a:hover { color: #68bb7d;}
+#tempaltemo_footer a:hover { color: #823ac7;}
 #tempaltemo_footer ul.footer-link-list li { padding-top: 10px;}
 #tempaltemo_footer ul.footer-icons li {
   width: 2.6em;

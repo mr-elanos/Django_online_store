@@ -1,52 +1,101 @@
-{% extends 'pages/base.html' %}
-{% load static %}
+{% extends "pages/base.html" %}
 {% block title %}
-    Your shopping cart
+  Корзина покупок
 {% endblock %}
+
 {% block content %}
-    <h1>Your shopping cart</h1>
-    <table class="cart">
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in cart %}
-            {% with product=item.product %}
-                <tr>
-                    <td>
-                        <a href="{{ product.get_absolute_url }}">
-                            <img src="
-                                {% if product.image %}
-                                    {{ product.image.url }}
-                                {% else %}
-                                    {% static "img/no_image.png" %}
-                                {% endif %}">
-                        </a>
-                    </td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td><a href="{% url "cart:cart_remove" product.id%}">Remove</a></td>
-                    <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
-                </tr>
-            {% endwith %}
-        {% endfor %}
-        <tr class="total">
-            <td>Total</td>
-            <td colspan="4"></td>
-            <td class="num">${{ cart.get_total_price }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <p class="text-right">
-        <a href="{% url 'all_categories' %}" class="button light">Continue shopping</a>
-        <a href="#" class="button">Checkout</a>
-    </p>
+{% if not cart %}
+<section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <center>
+                            <p><h2>У кошику пусто :( </h2></p>
+                            <p><h2>Можливо, Ви знайдете щось у нашому</h2> <a href="{% url 'all_categories' %}"><h2>каталозі</h2></a></p>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+{% else %}
+ <section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <p><h3>Ваш кошик: </h3></p>
+                            <table class="cart">
+                                <thead>
+                                    <tr>
+                                        <th>Зображення</th>
+                                        <th><center>Товар</center></th>
+                                        <th><center>Ціна</center></th>
+                                        <th>Кількість</th>
+                                        <th><center>Всього</center></th>
+                                    </tr>
+                                </thead>
+                                <div>
+                                    <tbody>
+                                    {% for item in cart %}
+                                    {% with product=item.product %}
+                                        <tr>
+                                            <td>
+                                                {% if product.image %}
+                                                <img src="{{product.image.url}}" class="rounded-circle img-fluid border" width="120" height="100">
+                                                {% endif %}
+                                            </td>
+                                            <td><center><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></center></td>
+                                            <td class="num"><strong>{{ item.price }}</strong></td>
+                                            <td>
+                                                <center>
+                                                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                                        {{ item.update_quantity_form.quantity }}
+                                                        {{ item.update_quantity_form.update }}
+                                                        <input type="submit" value="&#10004;">
+                                                        {% csrf_token %}
+                                                    </form>
+                                                </center>
+                                            </td>
+                                            <td class="num"><strong>{{ item.total_price }}</strong></td>
+                                            <td></td>
+                                            <td><a href="{% url 'cart:cart_remove' product.id %}">&#10006;</a></td>
+                                        </tr>
+                                       {% endwith %}
+                                       {% endfor %}
+                                    </tbody>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <p><h3>До сплати: </h3></p>
+                            <p class="text-right">
+                                <div class="row pb-3">
+                                    <div class="col d-grid">
+                                        <center><p><h3>{{ cart.get_total_price }} грн.</h3></p></center>
+                                        <a href="#">
+                                            <button type="submit" class="btn btn-success btn-lg px-3"> Оформити замовлення </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <center><a class="nav-link" href="{% url 'all_categories' %}"><h4>Назад до каталогу</h4></a></center>
+        </div>
+ </section>
+
+{% endif %}
 {% endblock %}
