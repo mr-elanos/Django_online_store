@@ -96,7 +96,13 @@
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="{% url 'cart:cart_detail' %}">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">{{ total_items }}</span>
+                        {% else %}
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        {% endif %}
+                        {% endwith %}
                     </a>
                 </div>
             </div>
