@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'pages.apps.PagesConfig',
-    'cart', # прописываем через клас - это в дальнейшем облегчает работу
+    'cart',
+    'orders',  # прописываем через клас - это в дальнейшем облегчает работу
 ]
 
 MIDDLEWARE = [

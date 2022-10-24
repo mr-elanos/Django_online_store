@@ -10,6 +10,7 @@ from pages.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^cart/', include('cart.urls')),
+    re_path(r'^orders/', include('orders.urls')),
     path('', include('pages.urls')),  # отдельно добавляет маршруты приложения
 ]
 

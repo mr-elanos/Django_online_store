@@ -1,0 +1,35 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+<div class="container py-5" xmlns="http://www.w3.org/1999/html">
+    <ul>
+        {% for item in cart %}
+        <li>
+            {% if item.product.image %}
+            <img src="{{item.product.image.url}}" class="rounded-circle img-fluid border" width="120" height="100">
+            {% endif %}
+            {{ item.quantity }}x {{ item.product.name }} :
+            <span> <strong>{{ item.total_price }} грн.</strong></span>
+        </li>
+        {% endfor %}
+    </ul>
+    <form class="col-md-9 m-auto" method="post" role="form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                {% for f in form %}
+                <div class="mb-3">
+                    {{f}}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-end mt-2">
+                <p><h4><strong>Всього на суму: {{ cart.get_total_price }} грн.</strong></h4></p>
+                <button type="submit" class="btn btn-success btn-lg px-3">Замовити</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
