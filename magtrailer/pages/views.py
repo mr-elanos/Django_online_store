@@ -9,6 +9,8 @@ from .models import *
 from .forms import ContactForm
 from .utils import PagesMixin, menu
 from cart.forms import CartAddProductForm
+from django.core.mail import send_mail
+from magtrailer.KEY import from_email, recipient_list
 
 
 def index(request):
@@ -70,6 +72,12 @@ class Contacts(PagesMixin, CreateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Контакти')
+        send_mail('Нове питання у магазині MAG Trailer',
+                  f'У вашому магазині MAG Trailer задано нове питання',
+                  from_email=from_email,
+                  recipient_list=[recipient_list],
+                  fail_silently=False,
+                  )
         return dict(list(context.items()) + list(c_def.items()))
 
 

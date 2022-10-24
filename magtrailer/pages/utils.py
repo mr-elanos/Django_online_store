@@ -11,7 +11,7 @@ menu = [{'title': 'ГОЛОВНА', 'url_name': 'home'},
 
 
 class PagesMixin:
-    paginate_by = 1
+    paginate_by = 9
 
     def get_user_context(self, **kwargs):
         context = kwargs

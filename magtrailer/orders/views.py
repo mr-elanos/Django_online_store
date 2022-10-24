@@ -3,6 +3,8 @@ from .forms import OrderCreateForm
 from .models import OrderItem
 from cart.cart import Cart
 from pages.utils import menu
+from django.core.mail import send_mail
+from magtrailer.KEY import from_email, recipient_list
 
 
 def order_create(request):
@@ -16,11 +18,17 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
+            send_mail('Нове замовлення в магазині MAG Trailer',
+                      f'Зареєстровано нове замовлення:\n\n\n {order}',
+                      from_email=from_email,
+                      recipient_list=[recipient_list],
+                      fail_silently=False,
+                      )
             # очистка корзины
             cart.clear()
             return render(request, 'pages/ok_form.html',
-                          {'order': order, 'menu': menu})
+                          {'order': order, 'menu': menu, 'title': 'Замовлення прийнято'})
     else:
         form = OrderCreateForm
     return render(request, 'orders/order/create.html',
-                  {'cart': cart, 'form': form, 'menu': menu})
+                  {'cart': cart, 'form': form, 'menu': menu, 'title': 'Підтвердження замовлення'})
