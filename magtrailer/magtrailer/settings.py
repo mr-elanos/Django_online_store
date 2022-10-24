@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.redirects',
     'pages.apps.PagesConfig',
     'cart',
-    'orders',  # прописываем через клас - это в дальнейшем облегчает работу
+    'orders',
+    "debug_toolbar",  # прописываем через клас - это в дальнейшем облегчает работу
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'magtrailer.urls'
@@ -150,3 +152,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

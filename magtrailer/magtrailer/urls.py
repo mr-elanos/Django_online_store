@@ -11,7 +11,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^cart/', include('cart.urls')),
     re_path(r'^orders/', include('orders.urls')),
-    path('', include('pages.urls')),  # отдельно добавляет маршруты приложения
+    path('', include('pages.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),  # отдельно добавляет маршруты приложения
 ]
 
 # Для отображение при включенном DEBUG
