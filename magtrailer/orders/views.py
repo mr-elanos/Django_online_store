@@ -26,9 +26,13 @@ def order_create(request):
                       )
             # очистка корзины
             cart.clear()
-            return render(request, 'pages/ok_form.html',
+            return render(request, 'orders/order/ok_order.html',
                           {'order': order, 'menu': menu, 'title': 'Замовлення прийнято'})
     else:
         form = OrderCreateForm
     return render(request, 'orders/order/create.html',
                   {'cart': cart, 'form': form, 'menu': menu, 'title': 'Підтвердження замовлення'})
+
+
+def ok_order(request):
+    return render(request, 'pages/ok_form.html', {'menu': menu, 'title': 'Звернення прийнято'})
