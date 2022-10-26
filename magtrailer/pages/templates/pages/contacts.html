@@ -1,5 +1,6 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load cache %}
 
 {% block SEO %}
     <meta name="discription" content="Контактна інформація заводу MAG Trailer ✔ Консультація за телефонами (073) 304-18-27, (050) 471-47-28 ➥ Доставка по всій Україні">
@@ -8,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+{% cache 300 contact %}
     <!-- Start Content Page -->
     <div class="container-fluid bg-light py-5">
         <div class="col-md-6 m-auto text-center">
@@ -77,4 +79,5 @@
             </div>
         </div>
     </section>
+{% endcache %}
 {% endblock %}
