@@ -31,7 +31,7 @@
             <form action="{% url 'search_result' %}" method="get" class="modal-content modal-body border-0 p-0">
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Пошук ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
+                    <button type="submit" class="input-group-text bg-success text-light" title="Знайти">
                         <i class="fa fa-fw fa-search text-white"></i>
                     </button>
                 </div>
@@ -55,8 +55,7 @@
                     <a class="navbar-sm-brand text-light text-decoration-none">050-471-4728</a>
                 </div>
                 <div>
-                    <a class="text-light" href="https://www.youtube.com/" target="_blank" rel="sponsored"><i class="fab fa-youtube fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.youtube.com/channel/UCVzIN8uSIg6mcHbiCWYL6DA" target="_blank" rel="sponsored" title="Ми на youtube"><i class="fab fa-youtube fa-sm fa-fw me-2"></i></a>
                 </div>
             </div>
         </div>
@@ -66,7 +65,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'home' %}">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'home' %}" title="На головну">
                 MAG Trailer
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +76,7 @@
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         {% for m in menu %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url m.url_name %}">{{ m.title }}</a>
+                            <a class="nav-link" href="{% url m.url_name %}" title="{{m.title}}">{{ m.title }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -91,10 +90,10 @@
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search" title="Пошук">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'cart:cart_detail' %}">
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'cart:cart_detail' %}" title="Кошик">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         {% with total_items=cart|length %}
                         {% if cart|length > 0 %}
@@ -121,7 +120,7 @@
         <ul class="pagination pagination-lg justify-content-end">
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{page_obj.previous_page_number}}">&lt;</a>
+                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{page_obj.previous_page_number}}" title="Попередня">&lt;</a>
             </li>
             {% endif %}
 
@@ -132,13 +131,13 @@
             </li>
             {% elif p >= page_obj.number|add:-1 and p <= page_obj.number|add:1 %}
             <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{p}}">{{p}}</a>
+                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{p}}" title="{{p}}">{{p}}</a>
             </li>
             {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{page_obj.next_page_number}}">&gt;</a>
+                <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="?q={{q}}&page={{page_obj.next_page_number}}" title="Наступна">&gt;</a>
             </li>
             {% endif %}
         </ul>
@@ -185,16 +184,16 @@
                         {% load pages_tags %}
                         {% getcats as categories %}
                         {% for c in categories %}
-                        <li><a class="text-decoration-none" href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+                        <li><a class="text-decoration-none" href="{{c.get_absolute_url}}" title="Категорія: {{c.name}}">{{c.name}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Інформація</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="{% url 'contacts' %}">Контакти</a></li>
-                        <li><a class="text-decoration-none" href="{% url 'buy_and_delivery' %}">Доставка і оплата</a></li>
-                        <li><a class="text-decoration-none" href="{% url 'about' %}">Про нас</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contacts' %}" title="Контакти">Контакти</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'buy_and_delivery' %}"title="Доставка і оплата">Доставка і оплата</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'about' %}" title="Про нас">Про нас</a></li>
                     </ul>
                 </div>
             </div>
@@ -205,7 +204,7 @@
                     <div class="col-12">
                         <p class="text-left text-light">
                             Copyright &copy; 2022 MAG Trailer
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank" title="Designed by">TemplateMo</a>
                         </p>
                     </div>
                 </div>
@@ -216,6 +215,10 @@
 
     <!-- Start Script -->
     <script src="{% static 'pages/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'pages/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'pages/js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'pages/js/templatemo.js' %}"></script>
+    <script src="{% static 'pages/js/custom.js' %}"></script>
     <!-- End Script -->
 
 </body>

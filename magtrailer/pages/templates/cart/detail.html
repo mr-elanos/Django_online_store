@@ -12,7 +12,7 @@
             <div class="col-lg-7 mt-5">
                 <center>
                     <p><h2>У кошику пусто &#128528;</h2></p>
-                    <p><h2>Можливо, Ви знайдете щось у нашому</h2><a href="{% url 'all_categories' %}"><h2>каталозі&#9754;</h2></a></p>
+                    <p><h2>Можливо, Ви знайдете щось у нашому</h2><a href="{% url 'all_categories' %}" title="До каталогу"><h2>каталозі&#9754;</h2></a></p>
                 </center>
             </div>
         </div>
@@ -44,10 +44,10 @@
                     <td>
                         <center>
                         <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            {% csrf_token %}
                             {{ item.update_quantity_form.quantity }}
                             {{ item.update_quantity_form.update }}
                             <input type="submit" value="&#10004;">
-                            {% csrf_token %}
                         </form>
                         </center>
                     </td>

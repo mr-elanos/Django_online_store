@@ -39,11 +39,11 @@
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
                                 {% if p.image %}
-                                <a href="{{ p.get_absolute_url }}"><img class="card-img rounded-0 img-fluid" src="{{p.image.url}}"></a>
+                                <a href="{{ p.get_absolute_url }}"><img class="card-img rounded-0 img-fluid" src="{{p.image.url}}" title="Детально"></a>
                                 {% endif %}
                             </div>
                             <div class="card-body">
-                                <a href="{{ p.get_absolute_url }}" class="h3 text-decoration-none"><center>{{ p.name }}</center></a>
+                                <a href="{{ p.get_absolute_url }}" class="h3 text-decoration-none" title="Детально"><center>{{ p.name }}</center></a>
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li><strong>{{ p.availability }}</strong></li>
                                 </ul>

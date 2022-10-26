@@ -99,10 +99,10 @@
             {% for c in categories %}
             <div class="col-12 col-md-4 p-5 mt-3">
                 {% if c.image %}
-                <a href="{{ c.get_absolute_url }}"><img src="{{c.image.url}}" class="rounded-circle img-fluid border"></a>
+                <a href="{{ c.get_absolute_url }}"><img src="{{c.image.url}}" class="rounded-circle img-fluid border" title="Категорія: {{c.name}}"></a>
                 {% endif %}
                 <h5 class="text-center mt-3 mb-3">{{c.name}}</h5>
-                <p class="text-center"><a class="btn btn-success" href="{{ c.get_absolute_url }}">До розділу</a></p>
+                <p class="text-center"><a class="btn btn-success" href="{{ c.get_absolute_url }}" title="Категорія: {{c.name}}">До розділу</a></p>
             </div>
             {% endfor %}
         </div>
