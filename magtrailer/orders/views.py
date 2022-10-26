@@ -24,7 +24,6 @@ def order_create(request):
                       recipient_list=[recipient_list],
                       fail_silently=False,
                       )
-            # очистка корзины
             cart.clear()
             return render(request, 'orders/order/ok_order.html',
                           {'order': order, 'menu': menu, 'title': 'Замовлення прийнято'})

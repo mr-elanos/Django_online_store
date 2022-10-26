@@ -1,6 +1,12 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
+{% block SEO %}
+    <meta name="discription" content="Результат пошуку">
+    <meta name="keywords" content="Результат пошуку">
+    <meta name="robots", content="noindex,nofollow">
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
         <div class="row">
@@ -26,7 +32,7 @@
                     </div>
                     {% endfor %}
                     {% else %}
-                    <p><h3>Нічого не знайдено</h3></p>
+                    <center><p><h3>На жаль, за Вашим запитом нічого не знайдено &#128528;</h3></p></center>
                     {% endif %}
                 </div>
             </div>

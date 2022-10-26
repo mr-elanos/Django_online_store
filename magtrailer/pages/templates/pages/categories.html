@@ -1,5 +1,11 @@
 {% extends 'pages/base.html' %}
 
+{% block SEO %}
+<meta name="discription" content="Купити причепи MAG | Одноосні та двохосні ✔ Гарні ціни та висока якість ➥ В наявності та під замовлення ✅ Доставка по Україні">
+<meta name="keywords" content="маг причеп, mag причіп, mag trailer, легкові причепи, виробництво причепів">
+<meta name="robots", content="index,follow">
+{% endblock %}
+
 {% block content %}
  <!-- Start Content -->
     <div class="container py-5">
@@ -27,7 +33,6 @@
                 </ul>
             </div>
             <div class="col-lg-9">
-
                 <div class="row">
                     {% for p in products %}
                     <div class="col-md-4">
@@ -51,5 +56,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

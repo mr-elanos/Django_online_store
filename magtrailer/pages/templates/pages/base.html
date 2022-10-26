@@ -1,7 +1,6 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="uk">
+{% load static %}
 <head>
     <title>{{ title }}</title>
     <meta charset="utf-8">
@@ -12,13 +11,17 @@
 
     <link rel="stylesheet" href="{% static 'pages/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'pages/css/templatemo.css' %}">
-    <link rel="stylesheet" href="{% static 'pages/css/custom.css' %}">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="{% static 'pages/css/fontawesome.min.css' %}">
+
+    {% block SEO %}
+    {% endblock %}
+
 </head>
 <body>
+
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -35,6 +38,7 @@
             </form>
         </div>
     </div>
+    <!-- Close Modal -->
 
     <!-- Start Top Nav -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
@@ -59,19 +63,15 @@
     </nav>
     <!-- Close Top Nav -->
 
-
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-
             <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'home' %}">
                 MAG Trailer
             </a>
-
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
@@ -106,16 +106,16 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </nav>
     <!-- Close Header -->
-{% block main_menu %}
-{% endblock main_menu %}
+
 
 {% block content %}
 {% endblock %}
 
+
+    <!-- Start pagination -->
 {% if page_obj.has_other_pages %}
     <div div="row">
         <ul class="pagination pagination-lg justify-content-end">
@@ -144,6 +144,7 @@
         </ul>
     </div>
 {% endif %}
+    <!-- End pagination -->
 
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
@@ -178,7 +179,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Категорії</h2>
                     <ul class="list-unstyled text-light footer-link-list">
@@ -189,7 +189,6 @@
                         {% endfor %}
                     </ul>
                 </div>
-
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Інформація</h2>
                     <ul class="list-unstyled text-light footer-link-list">
@@ -198,12 +197,8 @@
                         <li><a class="text-decoration-none" href="{% url 'about' %}">Про нас</a></li>
                     </ul>
                 </div>
-
             </div>
-
-
         </div>
-
         <div class="w-100 bg-black py-3">
             <div class="container">
                 <div class="row pt-2">
@@ -216,15 +211,12 @@
                 </div>
             </div>
         </div>
-
     </footer>
     <!-- End Footer -->
+
     <!-- Start Script -->
-    <script src="{% static 'pages/js/jquery-1.11.0.min.js' %}"></script>
-    <script src="{% static 'pages/js/jquery-migrate-1.2.1.min.js' %}"></script>
     <script src="{% static 'pages/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'pages/js/templatemo.js' %}"></script>
-    <script src="{% static 'pages/js/custom.js' %}"></script>
     <!-- End Script -->
+
 </body>
 </html>

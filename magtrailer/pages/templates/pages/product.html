@@ -1,5 +1,10 @@
 {% extends 'pages/base.html' %}
 
+{% block SEO %}
+    <meta name="discription" content="Купити {{product.name}} від заводу MAG Trailer">
+    <meta name="keywords" content="Причіп, mag, mag trailer, виробництво причепів">
+    <meta name="robots", content="index,follow">
+{% endblock %}
 
 {% block content %}
     <!-- Open Content -->
@@ -11,12 +16,8 @@
                         <img class="card-img img-fluid" src="{{product.image.url}}" alt="Card image cap" id="product-detail">
                     </div>
                     <div class="row">
-                        <!--Start Carousel Wrapper-->
                         <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
-                            <!--Start Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
-
-                                <!--First slide-->
                                 <div class="carousel-item active">
                                     <div class="row">
                                         {% for p in photos %}
@@ -28,14 +29,10 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                <!--/.First slide-->
                             </div>
-                            <!--End Slides-->
                         </div>
-                        <!--End Carousel Wrapper-->
                     </div>
                 </div>
-                <!-- col end -->
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body">
@@ -53,7 +50,6 @@
                             </ul>
                             <p><strong><h3>{{product.availability}}</h3></strong></p>
                             <p class="h3 py-2"><h5>Ціна: {{product.price}} грн.</h5></p>
-
                             <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                 <div class="row pb-3">
                                     <div class="col d-grid">
@@ -67,7 +63,6 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

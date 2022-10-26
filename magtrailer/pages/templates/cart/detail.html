@@ -1,24 +1,23 @@
 {% extends "pages/base.html" %}
-{% block title %}
-  Корзина покупок
+
+{% block SEO %}
+    <meta name="discription" content="Сторінка кошика покупця MAG Trailer. Тут можна оформити замовлення">
+    <meta name="robots", content="noindex,nofollow">
 {% endblock %}
 
 {% block content %}
 {% if not cart %}
-
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-7 mt-5">
-                    <center>
-                        <p><h2>У кошику пусто :( </h2></p>
-                        <p><h2>Можливо, Ви знайдете щось у нашому</h2> <a href="{% url 'all_categories' %}"><h2>каталозі</h2></a></p>
-                    </center>
-                </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-7 mt-5">
+                <center>
+                    <p><h2>У кошику пусто &#128528;</h2></p>
+                    <p><h2>Можливо, Ви знайдете щось у нашому</h2><a href="{% url 'all_categories' %}"><h2>каталозі&#9754;</h2></a></p>
+                </center>
             </div>
         </div>
-
+    </div>
 {% else %}
-
     <div class="container py-5">
         <table class="cart">
             <thead>
@@ -62,20 +61,18 @@
             </div>
         </table>
     </div>
-
-        <p class="text-right">
-            <div class="row pb-3">
-                <div class="col d-grid">
-                    <center><p><h3>{{ cart.get_total_price }} грн.</h3></p></center>
-                    <a href="{% url 'orders:order_create' %}">
-                        <button type="submit" class="btn btn-success btn-lg px-3"> Оформити замовлення </button>
-                    </a>
-                </div>
-                <div class="flex-fill">
-                    <a class="nav-link" href="{% url 'all_categories' %}"> Назад до каталогу </a>
-                </div>
+    <p class="text-right">
+        <div class="row pb-3">
+            <div class="col d-grid">
+                <center><p><h3>{{ cart.get_total_price }} грн.</h3></p></center>
+                <a href="{% url 'orders:order_create' %}">
+                    <button type="submit" class="btn btn-success btn-lg px-3"> Оформити замовлення </button>
+                </a>
             </div>
-        </p>
-
+            <div class="flex-fill">
+                <a class="nav-link" href="{% url 'all_categories' %}"> Назад до каталогу </a>
+            </div>
+        </div>
+    </p>
 {% endif %}
 {% endblock %}

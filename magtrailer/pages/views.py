@@ -1,8 +1,7 @@
 from django.db.models import Q
 from django.http import HttpResponseNotFound
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 
 from .models import *
@@ -24,7 +23,7 @@ class AllCategories(PagesMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Наші причепи')
+        c_def = self.get_user_context(title='Легкові причепи MAG від заводу MAG Trailer')
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
@@ -40,7 +39,7 @@ class ShowCategories(PagesMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c = Category.objects.get(slug=self.kwargs['cat_slug'])
-        c_def = self.get_user_context(title='Категорія: ' + str(c.name),
+        c_def = self.get_user_context(title=str(c.name) + ' причепи MAG',
                                       cat_selected=c.pk)
         return dict(list(context.items()) + list(c_def.items()))
 
@@ -62,7 +61,7 @@ class ShowProduct(PagesMixin, DetailView):
 
 
 def buy_and_delivery(request):
-    return render(request, 'pages/buy_and_delivery.html', {'menu': menu, 'title': 'Доставка і оплата'})
+    return render(request, 'pages/buy_and_delivery.html', {'menu': menu, 'title': 'Доставка і оплата в магазині'})
 
 
 class Contacts(PagesMixin, CreateView):
@@ -72,13 +71,7 @@ class Contacts(PagesMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Контакти')
-        send_mail('Нове питання у магазині MAG Trailer',
-                  f'У вашому магазині MAG Trailer задано нове питання',
-                  from_email=from_email,
-                  recipient_list=[recipient_list],
-                  fail_silently=False,
-                  )
+        c_def = self.get_user_context(title='Контакти заводу MAG Trailer')
         return dict(list(context.items()) + list(c_def.items()))
 
 
@@ -100,11 +93,17 @@ class Search(PagesMixin, ListView):
 
 
 def ok_form(request):
+    send_mail('Нове питання у магазині MAG Trailer',
+              f'У вашому магазині MAG Trailer задано нове питання',
+              from_email=from_email,
+              recipient_list=[recipient_list],
+              fail_silently=False,
+              )
     return render(request, 'pages/ok_form.html', {'menu': menu, 'title': 'Звернення прийнято'})
 
 
 def about(request):
-    return render(request, 'pages/about.html', {'menu': menu, 'title': 'Про підприємство'})
+    return render(request, 'pages/about.html', {'menu': menu, 'title': 'Про завод автопричепів'})
 
 
 def pageNotFound(request, exception):
