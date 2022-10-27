@@ -2,3 +2,5 @@
 /.idea/
 /magtrailer/magtrailer/KEY.py
 /magtrailer/magtrailer_cache/
+/magtrailer/secret_key.txt
+/magtrailer/EMAIL_HOST_PASSWORD.txt

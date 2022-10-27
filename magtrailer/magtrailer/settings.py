@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = KEY.SECRET_KEY  # Вынесли в отдельный файл
+with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'cart',
     'orders',
-    "debug_toolbar",  # прописываем через клас - это в дальнейшем облегчает работу
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = KEY.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = KEY.EMAIL_HOST_PASSWORD
+with open(os.path.join(BASE_DIR, 'EMAIL_HOST_PASSWORD.txt')) as f:
+    EMAIL_HOST_PASSWORD = f.read().strip()
 DEFAULT_FROM_EMAIL = KEY.DEFAULT_FROM_EMAIL
 
 ADMINS = (
