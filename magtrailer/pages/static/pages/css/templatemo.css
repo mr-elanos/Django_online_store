@@ -98,6 +98,37 @@ body, ul, li, p, a, label, input, div {
   visibility: visible;
   opacity: 1;
 }
+
+.card__empty {
+    text-align: center;
+}
+
+table, .cart-name {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+th {
+  font-weight: normal;
+  color: #039;
+  border-bottom: 2px solid #6678b1;
+  padding: 10px 8px;
+}
+td {
+  color: #669;
+  padding: 9px 8px;
+  transition: .3s linear;
+}
+
+.OkBt {
+    background-color: #f7f6f5;
+    border: none;
+
+}
+
 .card.product-wap a { color: #000;}
 #carousel-related-product .slick-slide:focus { outline: none !important;}
 #carousel-related-product .slick-dots li button:before {

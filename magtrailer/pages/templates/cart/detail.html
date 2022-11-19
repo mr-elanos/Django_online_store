@@ -2,18 +2,16 @@
 
 {% block SEO %}
     <meta name="discription" content="Сторінка кошика покупця MAG Trailer. Тут можна оформити замовлення">
-    <meta name="robots", content="noindex,nofollow">
+    <meta name="robots" content="noindex,nofollow">
 {% endblock %}
 
 {% block content %}
 {% if not cart %}
     <div class="container py-5">
         <div class="row">
-            <div class="col-lg-7 mt-5">
-                <center>
-                    <p><h2>У кошику пусто &#128528;</h2></p>
-                    <p><h2>Можливо, Ви знайдете щось у нашому</h2><a href="{% url 'all_categories' %}" title="До каталогу"><h2>каталозі&#9754;</h2></a></p>
-                </center>
+            <div class="col-lg-7 mt-5 card__empty">
+                <p><h2>У кошику пусто &#128528;</h2></p>
+                <p><h3>Можливо, Ви знайдете щось у нашому</h3><a href="{% url 'all_categories' %}" title="До каталогу"><h3>каталозі&#9754;</h3></a></p>
             </div>
         </div>
     </div>
@@ -21,12 +19,11 @@
     <div class="container py-5">
         <table class="cart">
             <thead>
-                <tr>
-                    <th></th>
-                    <th><center>Товар</center></th>
-                    <th><center>Ціна</center></th>
+                <tr style="text-align: center">
+                    <th colspan="2">Товар</th>
+                    <th>Ціна</th>
                     <th>Кількість</th>
-                    <th><center>Сума</center></th>
+                    <th>Сума</th>
                 </tr>
             </thead>
             <div>
@@ -39,21 +36,20 @@
                         <img src="{{product.image.url}}" class="rounded-circle img-fluid border" width="120" height="100">
                         {% endif %}
                     </td>
-                    <td><center><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></center></td>
+                    <td><a class='cart-name' href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
                     <td class="num"><strong>{{ item.price }}</strong></td>
                     <td>
-                        <center>
                         <form action="{% url 'cart:cart_add' product.id %}" method="post">
                             {% csrf_token %}
                             {{ item.update_quantity_form.quantity }}
                             {{ item.update_quantity_form.update }}
-                            <input type="submit" value="&#10004;">
+                            <input class="OkBt" type="submit" value="&#10004;">
                         </form>
-                        </center>
                     </td>
-                    <td class="num"><strong>{{ item.total_price }}</strong></td>
-                    <td></td>
-                    <td><a href="{% url 'cart:cart_remove' product.id %}">&#10006;</a></td>
+                    <td class="num">
+                        <strong>{{ item.total_price }}</strong>
+                    <a class='cart-name' href="{% url 'cart:cart_remove' product.id %}">&#10006;</a>
+                    </td>
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -64,7 +60,7 @@
     <p class="text-right">
         <div class="row pb-3">
             <div class="col d-grid">
-                <center><p><h3>{{ cart.get_total_price }} грн.</h3></p></center>
+                <p><center><h3>{{ cart.get_total_price }} грн.</h3></center></p>
                 <a href="{% url 'orders:order_create' %}">
                     <button type="submit" class="btn btn-success btn-lg px-3"> Оформити замовлення </button>
                 </a>
